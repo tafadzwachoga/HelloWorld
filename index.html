@@ -7,30 +7,74 @@
     <title>Document</title>
 
 </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Include Bootstrap CSS -->
+  <link href="path/to/bootstrap.min.css" rel="stylesheet">
+  <title>Your Page Title</title>
+</head>
 <body>
 
-    <script>
-        const queries = [
-  {id: 1, student: "Genesis", query: "Permission to absent from tech class", status: "APPROVED"},
-  {id: 2, student: "Nunya", query: "Permission to Absa Hackathon", status: "APPROVED"},
-  {id: 3, student: "Fleeur", query: "Permission to shoot film", status: "DECLINED"},
-  {id: 4, student: "Delight", query: "Need some delightful time to cool off", status: "DECLINED"},
-  {id: 5, student: "Sila", query: "Permission to participate in Absa Hackathon", status: "PENDING"},
-];
+  <div class="container mt-5">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Student</th>
+          <th scope="col">Query</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody id="tbl"></tbody>
+    </table>
+  </div>
 
-// Using a while loop
-let i = 0;
-while (i < queries.length) {
-  const currentQuery = queries[i];
+  <script>
+    function createTableRow(query) {
+      const { id, student, query: studentQuery, status } = query;
+      const tableRow = document.createElement("tr");
+
+      tableRow.innerHTML = `<th scope="row">${id}</th>
+                <td>${student}</td>
+                <td>${studentQuery}</td>
+                <td>${status}</td>
+                <td><a href="#" class="btn btn-success">Approve</a> &nbsp; &nbsp; &nbsp;<a href="#" class="btn btn-danger">Decline</a></td>`;
+
+      return tableRow;
+    }
+
+    function appendRowsToTable(queries) {
+      const tableBody = document.getElementById("tbl");
+      queries.forEach((query) => {
+        const tableRow = createTableRow(query);
+        tableBody.appendChild(tableRow);
+      });
+    }
+
+    function getInfo() {
+      const queries = [
+        { id: 1, student: "Genesis", query: "Permission to absent from tech class", status: "APPROVED" },
+        { id: 2, student: "Nunya", query: "Permission to Absa Hackathon", status: "APPROVED" },
+        { id: 3, student: "Fleeur", query: "Permission to shoot film", status: "DECLINED" },
+        { id: 4, student: "Delight", query: "Need some delightful time to cool off", status: "DECLINED" },
+        { id: 5, student: "Sila", query: "Permission to participate in Absa Hackathon", status: "PENDING" },
+      ];
+
+      appendRowsToTable(queries);
+    }
+
+    getInfo();
+  </script>
+
+  <!-- Include Bootstrap JS (Optional) -->
+  <script src="path/to/bootstrap.bundle.min.js"></script>
+
   
-  // Log the information (you can modify this part based on your needs)
-  console.log(`ID: ${currentQuery.id}, Student: ${currentQuery.student}, Query: ${currentQuery.query}, Status: ${currentQuery.status}`);
-
-  // Increment the index for the next iteration
-  i++;
-}
-
-    </script>
-    
 </body>
+</html>
+
 </html>
